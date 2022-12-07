@@ -7,4 +7,8 @@ import java.util.Optional;
 
 public interface MemoRepository extends JpaRepository<Memo, Long> {
 
+    Optional<Memo> findByIdAndUserName(Long id, String username);
+
+    Optional<Memo> deleteByIdAndUserName(Long id, String username);
+
 }

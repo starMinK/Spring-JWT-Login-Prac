@@ -1,18 +1,15 @@
 package com.sparta.week04.entity;
 
 import com.sparta.week04.dto.MemoRequestDto;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
 @Getter
-@Setter
 @Entity
 @NoArgsConstructor
-public class Memo extends TimeStamped {
+public class Memo extends Timestamped {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +24,14 @@ public class Memo extends TimeStamped {
     @Column(nullable = false)
     private String contents;
 
-    public Memo(MemoRequestDto memoRequestDto, Long id, String userName) {
-        this.id = id;
+    public Memo(MemoRequestDto memoRequestDto, String userName) {
         this.title = memoRequestDto.getTitle();
         this.contents = memoRequestDto.getContents();
         this.userName = userName;
+    }
+
+    public void update(MemoRequestDto memoRequestDto) {
+        this.title = memoRequestDto.getTitle();
+        this.contents = memoRequestDto.getContents();
     }
 }

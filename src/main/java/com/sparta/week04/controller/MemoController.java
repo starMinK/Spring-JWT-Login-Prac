@@ -1,5 +1,6 @@
 package com.sparta.week04.controller;
 
+import com.sparta.week04.dto.DeleteResponseDto;
 import com.sparta.week04.dto.MemoRequestDto;
 import com.sparta.week04.dto.MemoResponseDto;
 import com.sparta.week04.service.MemoService;
@@ -28,16 +29,16 @@ public class MemoController {
 
     @GetMapping("/post/{id}")
     public MemoResponseDto readOne(@PathVariable Long id) {
-        return memoService.readOne();
+        return memoService.readOne(id);
     }
 
     @PutMapping("/post/{id}")
-    public MemoResponseDto update(@RequestBody MemoRequestDto memoRequestDto, @PathVariable Long id) {
-        return memoService.update();
+    public MemoResponseDto update(@RequestBody MemoRequestDto memoRequestDto, @PathVariable Long id, HttpServletRequest request) {
+        return memoService.update(id, memoRequestDto, request);
     }
 
     @DeleteMapping("/post/{id}")
-    public MemoResponseDto delete(@PathVariable Long id) {
-        return memoService.DeleteOne();
+    public DeleteResponseDto delete(@PathVariable Long id, HttpServletRequest request) {
+        return memoService.DeleteOne(id, request);
     }
 }
